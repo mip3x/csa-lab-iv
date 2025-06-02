@@ -1,2 +1,2 @@
 # csa-iv
-4th laboratory work in the discipline "Computer System Architecture"
+4-ая лабораторная работа в рамках дисциплины "Архитектура компьютерных систем"
