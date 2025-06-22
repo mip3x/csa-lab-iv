@@ -34,6 +34,7 @@
 <if_stmt> ::= "if" <body> ("else" <body>)? "then"
 
 <loop_stmt> ::= "begin" <body> "until"
+            | <number> "times" <body> "next"
 
 <trap_block> ::= "trap" <ident> <body> "endtrap"
 
