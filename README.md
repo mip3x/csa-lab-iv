@@ -10,18 +10,15 @@
 Форма Бэкуса-Науэра:
 
 ```ebnf
-<program> ::= <definitions> <body>
+<program> ::= <terms>
 
-<definitions> ::= <definition>*                      
-
-<definition> ::= ":" <ident> <body> ";"
-
-<body> ::= <term>*                           
+<terms> ::= <term>*                     
 
 <term> ::= <number>
             | <string>
             | <ident>
             | <declaration>
+            | <definition>
             | <if_stmt>
             | <loop_stmt>
             | <trap_block>
@@ -31,6 +28,8 @@
             | "str" <ident> <string>
             | "port" <ident> <number>
             | "vector" <number> ":" <ident_list>
+
+<definition> ::= ":" <ident> <body> ";"
 
 <if_stmt> ::= "if" <body> ("else" <body>)? "then"
 
