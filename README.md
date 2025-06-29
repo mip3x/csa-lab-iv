@@ -10,7 +10,7 @@
 Форма Бэкуса-Науэра:
 
 ```ebnf
-<program> ::= <terms>
+<body> ::= <terms>
 
 <terms> ::= <term>*                     
 
@@ -38,7 +38,7 @@
 
 <trap_block> ::= "trap" <ident> <body> "endtrap"
 
-<require> ::= "require" <string>
+<require> ::= "#require" <string>
 
 <ident_list> ::= <ident> ("," <ident>)*
 
@@ -134,3 +134,10 @@
     - **Синтаксис**: `clearstack`
     - **Описание**: очистить полностью стек данных
     - **Операция**: `dataStack.pop()`
+
+- **Вывод символа на стандартный поток вывода**
+    - **Синтаксис**: `emit`
+    - **Описание**: взять верхний элемент со стека данных и передать на стандартный поток вывода
+    - **Операция**: `STDIN <- dataStack.top(); dataStack.pop()`
+
+- ****
