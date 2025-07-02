@@ -5,7 +5,7 @@
     times           \ D: [sum]      R: [n]
         r@          \ D: [sum:n]    R: [n]
         +           \ D: [sum+n]    R: [n]
-    next
+    next            \               R: [n-1]
 ;
 
 4 sum_1_to_n_times .
