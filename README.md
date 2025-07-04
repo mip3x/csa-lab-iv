@@ -2,7 +2,7 @@
 
 4-ая лабораторная работа в рамках дисциплины "Архитектура компьютерных систем"
 
-`Вариант`: `forth | cisc | harv | hw | tick | binary | trap | port | pstr | prob1 | vector`
+Вариант: `forth | cisc | harv | hw | tick | binary | trap | port | pstr | prob1 | vector`
 
 Расшифровка варианта:
  - `forth` - синтаксис языка `Forth` с обратной польской нотацией
