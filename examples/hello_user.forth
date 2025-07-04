@@ -14,10 +14,10 @@
 : read-symbol ( -- )
     _disable-int_
 
-    un-buffer-ptr 1 +
+    un-buffer-ptr @ 1 +
     un-buffer-ptr !
 
-    un-actual-size un-buffer-size =
+    un-actual-size @ un-buffer-size =
 
     if 
         1 overflow-error !
@@ -26,13 +26,15 @@
         _iret_
     then
 
-    key dup CR-char = if iret then dup NL-char = if iret then
-    un-buffer-ptr !
+    key dup CR-char = if _iret_ then dup NL-char = if _iret_ then
+    un-buffer-ptr @ !
 
-    un-actual-size 1 +
+    un-actual-size @ 1 +
     un-actual-size !
 
     _enable-int_
+
+    _iret_
 ;
 
 : read-string ( -- )
@@ -40,7 +42,7 @@
     _enable-int_
     _disable-int_
 
-    overlflow-error 1 = if _exit_ then
+    overflow-error 1 = if _exit_ then
 
     un-actual-size username-buffer !
 ;
@@ -72,3 +74,4 @@ username-buffer un-buffer-ptr !
 read-string
 hello-msg print-string
 username-buffer print-string
+exclamation-mark emit
