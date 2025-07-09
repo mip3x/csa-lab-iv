@@ -29,9 +29,12 @@
 |             | `mov [imm], rs`    | `M[imm] <- rs`             |   2   |
 |             | `mov rd, [rs+imm]` | `rd <- M[rs+imm]`          |   2   |
 |             | `mov [rd+imm], rs` | `M[rd+imm] <- rs`          |   2   |
-|  **push**   | `push rs`          | `SP <- SP-4; M[SP] <- rs`  |   1   |
+|  **push_ds**| `push rs`          | `SP <- SP-4; M[SP] <- rs`  |   1   |
 |             | `push imm`         | `SP <- SP-4; M[SP] <- imm` |   2   |
-|  **pop**    | `pop rd`           | `rd <- M[SP]; SP <- SP+4`  |   1   |
+|  **pop_ds** | `pop rd`           | `rd <- M[SP]; SP <- SP+4`  |   1   |
+|  **push_rs**| `push rs`          | `RP <- SP-4; M[RP] <- rs`  |   1   |
+|             | `push imm`         | `RP <- SP-4; M[RP] <- imm` |   2   |
+|  **pop_rs** | `pop rd`           | `rd <- M[RP]; SP <- RP+4`  |   1   |
 
 ## Арифметические операции
 
