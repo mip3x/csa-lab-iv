@@ -29,12 +29,12 @@
 |             | `mov [imm], rs`    | `M[imm] <- rs`             |   2   |
 |             | `mov rd, [rs+imm]` | `rd <- M[rs+imm]`          |   2   |
 |             | `mov [rd+imm], rs` | `M[rd+imm] <- rs`          |   2   |
-|  **push_ds**| `push rs`          | `SP <- SP-4; M[SP] <- rs`  |   1   |
-|             | `push imm`         | `SP <- SP-4; M[SP] <- imm` |   2   |
-|  **pop_ds** | `pop rd`           | `rd <- M[SP]; SP <- SP+4`  |   1   |
-|  **push_rs**| `push rs`          | `RP <- SP-4; M[RP] <- rs`  |   1   |
-|             | `push imm`         | `RP <- SP-4; M[RP] <- imm` |   2   |
-|  **pop_rs** | `pop rd`           | `rd <- M[RP]; SP <- RP+4`  |   1   |
+|  **push_ds**| `push rs`          | `SP <- SP-4`<br/>`M[SP] <- rs`  |   1   |
+|             | `push imm`         | `SP <- SP-4`<br/>`M[SP] <- imm` |   2   |
+|  **pop_ds** | `pop rd`           | `rd <- M[SP]`<br/>`SP <- SP+4`  |   1   |
+|  **push_rs**| `push rs`          | `RP <- SP-4`<br/>`M[RP] <- rs`  |   1   |
+|             | `push imm`         | `RP <- SP-4`<br/>`M[RP] <- imm` |   2   |
+|  **pop_rs** | `pop rd`           | `rd <- M[RP]`<br/>`SP <- RP+4`  |   1   |
 
 ## Арифметические операции
 
@@ -92,8 +92,8 @@
 
 | Мнемоника   | Синтаксис          | Семантика          | Длина |
 |-------------|--------------------|--------------------|-------|
-|   **out**   | `out <port>`       | `pop_ds DR`, `шина ВУ <- DR`    |   1   |
-|   **in**    | `in <port>`        | `DR <- шина ВУ`, `push_ds DR`    |   1   |
+|   **out**   | `out <port>`       | `pop_ds DR`<br/>`шина ВУ <- DR`    |   1   |
+|   **in**    | `in <port>`        | `DR <- шина ВУ`<br/>`push_ds DR`    |   1   |
 
 ## Операции управления прерываниями
 
