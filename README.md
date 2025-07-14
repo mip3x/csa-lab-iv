@@ -270,10 +270,10 @@
 
 ### DataPath
 
-![DataPath](img/DataPath.png)
+![DataPath](img/DataPath.svg)
 
 ### ControlUnit
 
-![ControlUnit](img/ControlUnit.png)
+![ControlUnit](img/ControlUnit.svg)
 
 ## Тестирование
