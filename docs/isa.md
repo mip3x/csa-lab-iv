@@ -34,7 +34,7 @@
 |  **pop_ds** | `pop rd`           | `rd <- M[SP]`<br/>`SP <- SP+4`  |   1   |
 |  **push_rs**| `push rs`          | `RP <- RP-4`<br/>`M[RP] <- rs`  |   1   |
 |             | `push imm`         | `RP <- RP-4`<br/>`M[RP] <- imm` |   2   |
-|  **pop_rs** | `pop rd`           | `rd <- M[RP]`<br/>`SP <- RP+4`  |   1   |
+|  **pop_rs** | `pop rd`           | `rd <- M[RP]`<br/>`RP <- RP+4`  |   1   |
 
 ## Арифметические операции
 
