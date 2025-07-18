@@ -58,11 +58,17 @@
             | <vector_block>
             | <require>
 
-<declaration> ::= "var" <ident> (<number>)?
-            | "str" <ident> <string>
-            | <number> "const" <ident>
-            | <number> "alloc" <ident>
-            | "vector" <number> ":" <ident>
+<declaration> ::= <variable> |
+            | <string>
+            | <const>
+            | <alloc>
+            | <vector>
+
+<variable> ::= "var" <ident> (<number>)?
+<string> ::= "str" <ident> <string>
+<const> ::= <number> "const" <ident>
+<alloc> ::= <number> "alloc" <ident>
+<vector> ::= "vector" <number> ":" <ident>
 
 <if_stmt> ::= "if" <body> ("else" <body>)? "then"
 
