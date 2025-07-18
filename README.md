@@ -55,19 +55,19 @@
             | <ident>
             | <if_stmt>
             | <loop_stmt>
-            | <vector_block>
+            | <vector>
             | <require>
 
 <declaration> ::= <variable> |
             | <str_literal>
             | <const>
             | <alloc>
-            | <vector>
 
 <variable> ::= "var" <ident> (<number>)?
 <str_literal> ::= "str" <ident> <string>
 <const> ::= <number> "const" <ident>
 <alloc> ::= <number> "alloc" <ident>
+
 <vector> ::= "vector" <number> ":" <ident>
 
 <if_stmt> ::= "if" <body> ("else" <body>)? "then"
