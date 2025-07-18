@@ -4,4 +4,6 @@
     next
 ;
 
-10 countdown
+\ comment
+
+0x0a countdown

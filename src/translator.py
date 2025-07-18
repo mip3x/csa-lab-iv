@@ -2,8 +2,115 @@
 
 import os
 import sys
+from enum import Enum
+from typing import List
 
 from definitions import *
+
+
+class Keyword(str, Enum):
+    DEF_START = ":"
+    DEF_END = ";"
+    IF = "if"
+    THEN = "then"
+    BEGIN = "begin"
+    UNTIL = "until"
+    TIMES = "times"
+    NEXT = "next"
+    VAR = "var"
+    CONST = "const"
+    STR = "str"
+    ALLOC = "alloc"
+    VECTOR = "vector"
+
+
+class TokenType(str, Enum):
+    NUMBER = "NUMBER"
+    STRING = "STRING"
+    WORD = "WORD"
+    SYM = "SYM"
+
+
+class Token:
+    def __init__(self, kind: TokenType, value: str):
+        self.kind = kind
+        self.value = value
+
+    def __repr__(self):
+        return f"Token({self.kind}, {self.value})"
+
+
+def tokenize(source: str) -> List[Token]:
+    tokens: List[Token] = list()
+    i = 0
+    source_len = len(source)
+    
+    while i < source_len:
+        char = source[i] 
+
+        if char.isspace():
+            i += 1
+            continue
+
+        if char == SIGNATURE_START_SYMBOL:
+            while i < source_len and source[i] != SIGNATURE_END_SYMBOL:
+                i += 1
+            i += 1
+
+            continue
+
+        if char == COMMENT_SYMBOL:
+            while i < source_len and source[i] != NEWLINE_SYMBOL:
+                i += 1
+            i += 1
+
+            continue
+
+        if char == ZERO_SYMBOL and i + 1 < source_len:
+            if (source[i + 1] == X_SYMBOL):
+                i += 2
+                hex_digit_start = i
+
+                if not (source[i].isdigit() or source[i].lower() in HEX_DIGITS):
+                    raise SyntaxError("некорректное число в формате hex!")
+
+                while i < source_len and (source[i].isdigit() or source[i].lower() in HEX_DIGITS):
+                    i += 1
+
+                hex_str = source[hex_digit_start : i]
+                hex_digit_token = Token(TokenType.NUMBER, int(hex_str, 16))
+                tokens.append(hex_digit_token)
+
+                continue
+
+        if char.isdigit():
+            digit_start = i
+
+            while i < source_len and source[i].isdigit():
+                i += 1
+
+            digit_token = Token(TokenType.NUMBER, source[digit_start : i])
+            tokens.append(digit_token)
+
+            continue
+
+        if char.isalpha() or char == '_':
+            word_start = i
+
+            while i < source_len and (source[i].isalnum() or source[i] == '_'):
+                i += 1
+
+            word_token = Token(TokenType.WORD, source[word_start : i])
+            tokens.append(word_token)
+
+            continue
+
+        # print(f"Alive char: {char}")
+        tokens.append(Token(TokenType.SYM, char))
+        i += 1
+
+    return tokens
+
 
 def preprocess(source_file: str, included_files=None) -> str:
     if included_files is None:
@@ -39,11 +146,14 @@ def preprocess(source_file: str, included_files=None) -> str:
     return "".join(out)
 
 
-def main(source_file: str, instr_file: str, data_file: str):
+def main(source_file: str, instr_file: str, data_file: str) -> None:
     """Функция запуска транслятора. Параметры -- исходный и целевой файлы."""
 
     source = preprocess(source_file)
+    tokens = tokenize(source)
+    
     print(source)
+    print(tokens)
 
 
 if __name__ == "__main__":
