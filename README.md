@@ -77,8 +77,6 @@
 <begin_loop> ::= "begin" <body> "until"
 <times_loop> ::= <number> "times" <body> "next"
 
-<vector_block> ::= "vector" <number> : <ident>
-
 <require> ::= "#require" <string>
 
 <number> ::= <decimal> | <hexadecimal>
