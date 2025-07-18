@@ -44,7 +44,7 @@
 
 <bindings> ::= <binding>*
 
-<binding> ::= <definition> | <declaration>
+<binding> ::= <definition> | <declaration> | <vector>
 
 <definition> ::= ":" <ident> <body> ";"
 
@@ -55,7 +55,6 @@
             | <ident>
             | <if_stmt>
             | <loop_stmt>
-            | <vector>
             | <require>
 
 <declaration> ::= <variable> |
