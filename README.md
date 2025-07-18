@@ -59,13 +59,13 @@
             | <require>
 
 <declaration> ::= <variable> |
-            | <string>
+            | <str_literal>
             | <const>
             | <alloc>
             | <vector>
 
 <variable> ::= "var" <ident> (<number>)?
-<string> ::= "str" <ident> <string>
+<str_literal> ::= "str" <ident> <string>
 <const> ::= <number> "const" <ident>
 <alloc> ::= <number> "alloc" <ident>
 <vector> ::= "vector" <number> ":" <ident>
