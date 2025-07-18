@@ -52,15 +52,36 @@ def tokenize(source: str) -> List[Token]:
             i += 1
             continue
 
+        if char == DOT_SYMBOL and \
+            i + 1 < source_len and \
+            source[i + 1] == STRING_QUOTE:
+            
+            print_string_token = Token(TokenType.SYM, source[i : i + 2])
+            tokens.append(print_string_token)
+            i += 2
+            
+            continue
+
         if char == SIGNATURE_START_SYMBOL:
-            while i < source_len and source[i] != SIGNATURE_END_SYMBOL:
-                i += 1
             i += 1
+            found_end_symbol = False
+
+            while i < source_len:
+                if source[i] == SIGNATURE_END_SYMBOL:
+                    i += 1
+                    found_end_symbol = True
+                    break
+                i += 1
+
+            if not found_end_symbol:
+                raise SyntaxError("нет закрывающей скобки для описания сигнатуры функции!")
 
             continue
 
         if char == COMMENT_SYMBOL:
-            while i < source_len and source[i] != NEWLINE_SYMBOL:
+            while i < source_len:
+                if source[i] == NEWLINE_SYMBOL:
+                    break
                 i += 1
             i += 1
 
@@ -94,7 +115,7 @@ def tokenize(source: str) -> List[Token]:
 
             continue
 
-        if char.isalpha() or char == '_':
+        if char.isalpha() or char == UNDERSCORE_SYMBOL:
             word_start = i
 
             while i < source_len and (source[i].isalnum() or source[i] == '_'):
@@ -105,7 +126,6 @@ def tokenize(source: str) -> List[Token]:
 
             continue
 
-        # print(f"Alive char: {char}")
         tokens.append(Token(TokenType.SYM, char))
         i += 1
 
@@ -153,7 +173,8 @@ def main(source_file: str, instr_file: str, data_file: str) -> None:
     tokens = tokenize(source)
     
     print(source)
-    print(tokens)
+    for token in tokens:
+        print(token)
 
 
 if __name__ == "__main__":
