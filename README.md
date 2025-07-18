@@ -55,7 +55,7 @@
             | <ident>
             | <if_stmt>
             | <loop_stmt>
-            | <trap_block>
+            | <vector_block>
             | <require>
 
 <declaration> ::= "var" <ident> (<number>)?
@@ -66,10 +66,12 @@
 
 <if_stmt> ::= "if" <body> ("else" <body>)? "then"
 
-<loop_stmt> ::= "begin" <body> "until"
-            | <number> "times" <body> "next"
+<loop_stmt> ::= <begin_loop> | <times_loop>
 
-<trap_block> ::= "trap" <ident> <body> "endtrap"
+<begin_loop> ::= "begin" <body> "until"
+<times_loop> ::= <number> "times" <body> "next"
+
+<vector_block> ::= "vector" <number> : <ident>
 
 <require> ::= "#require" <string>
 
