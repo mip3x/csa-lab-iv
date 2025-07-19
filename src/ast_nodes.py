@@ -5,11 +5,15 @@ class Node:
     pass
 
 
-class Statement(Node):
+class UnitItem(Node):
     pass
 
 
-class Binding(Node):
+class Statement(UnitItem):
+    pass
+
+
+class Binding(UnitItem):
     pass
 
 
@@ -129,4 +133,4 @@ class TimesLoop(LoopStatement):
         self.body = body
 
     def __repr__(self):
-        return f"TimesLoop(number={self.number}, body={self.body})"
+        return f"TimesLoop(body={self.body})"
