@@ -40,9 +40,9 @@
 Форма Бэкуса-Науэра:
 
 ```ebnf
-<program> ::= <top_item>*
+<program> ::= <unit_item>*
 
-<top_item> ::= <binding> | <statement>
+<unit_item> ::= <binding> | <statement>
 
 <binding> ::= <definition> | <declaration> | <vector>
 
