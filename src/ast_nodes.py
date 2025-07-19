@@ -125,8 +125,7 @@ class BeginLoop(LoopStatement):
 
 
 class TimesLoop(LoopStatement):
-    def __init__(self, number: Number, body: Body):
-        self.number = number
+    def __init__(self, body: Body):
         self.body = body
 
     def __repr__(self):
