@@ -12,7 +12,7 @@
 ;
 
 : read_symbol ( -- )
-    _disable-int_
+    _disable_int_
 
     un_buffer_ptr @ 1 +
     un_buffer_ptr !
@@ -48,7 +48,7 @@
 ;
 
 
-vector 1 : read-symbol
+vector 1 : read_symbol
 
 str question_msg "What is your name?"
 str error_msg "Buffer overflow!"
