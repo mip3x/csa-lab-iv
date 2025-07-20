@@ -30,7 +30,7 @@ class Ident(Statement):
         self.value = value
 
     def __repr__(self):
-        return f"Ident(value={self.value})"
+        return f"Ident(value=`{self.value}`)"
 
 
 class String(Statement):
@@ -38,7 +38,7 @@ class String(Statement):
         self.value = value
 
     def __repr__(self):
-        return f"String(value={self.value})"
+        return f"String(value=`{self.value}`)"
 
 
 class Number(Statement):
@@ -46,7 +46,7 @@ class Number(Statement):
         self.value = value
 
     def __repr__(self):
-        return f"Number(value={self.value})"
+        return f"Number(value=`{self.value}`)"
 
 
 class Body(Node):
@@ -76,16 +76,16 @@ class Definition(Binding):
 
 
 class Vector(Binding):
-    def __init__(self, number: Number, ident: Ident):
-        self.number = number
+    def __init__(self, port: Number | Ident, ident: Ident):
+        self.port = port
         self.ident = ident
 
     def __repr__(self):
-        return f"Vector(number={self.number}, ident={self.ident})"
+        return f"Vector(port={self.port}, ident={self.ident})"
 
 
 class Variable(Declaration):
-    def __init__(self, ident: Ident, number: Number):
+    def __init__(self, ident: Ident, number: Number | None):
         self.ident = ident
         self.number = number
 
@@ -103,12 +103,21 @@ class StringLiteral(Declaration):
 
 
 class Const(Declaration):
-    def __init__(self, number: Number, ident: Ident):
-        self.number = number
+    def __init__(self, ident: Ident, number: Number | Ident):
         self.ident = ident
+        self.number = number
 
     def __repr__(self):
-        return f"Const(number={self.number}, ident={self.ident})"
+        return f"Const(ident={self.ident}, number={self.number})"
+
+
+class Alloc(Declaration):
+    def __init__(self, ident: Ident, number: Number | Ident):
+        self.ident = ident
+        self.number = number
+
+    def __repr__(self):
+        return f"Alloc(ident={self.ident}, number={self.number})"
 
 
 class IfStatement(Statement):

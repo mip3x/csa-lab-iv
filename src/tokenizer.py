@@ -9,6 +9,9 @@ class TokenType(str, Enum):
     WORD = "WORD"
     SYM = "SYM"
 
+    def __str__(self):
+        return self.value
+
 
 class Token:
     def __init__(self, kind: TokenType, value: str):
@@ -31,7 +34,7 @@ def tokenize(source: str) -> List[Token]:
             i += 1
             continue
 
-        if char == DOT_SYMBOL and \
+        if char == DOT_SYM and \
             i + 1 < source_len and \
             source[i + 1] == STRING_QUOTE:
             
@@ -41,12 +44,12 @@ def tokenize(source: str) -> List[Token]:
             
             continue
 
-        if char == SIGNATURE_START_SYMBOL:
+        if char == SIGNATURE_START_SYM:
             i += 1
             found_end_symbol = False
 
             while i < source_len:
-                if source[i] == SIGNATURE_END_SYMBOL:
+                if source[i] == SIGNATURE_END_SYM:
                     i += 1
                     found_end_symbol = True
                     break
@@ -57,17 +60,17 @@ def tokenize(source: str) -> List[Token]:
 
             continue
 
-        if char == COMMENT_SYMBOL:
+        if char == COMMENT_SYM:
             while i < source_len:
-                if source[i] == NEWLINE_SYMBOL:
+                if source[i] == NEWLINE_SYM:
                     break
                 i += 1
             i += 1
 
             continue
 
-        if char == ZERO_SYMBOL and i + 1 < source_len:
-            if (source[i + 1] == X_SYMBOL):
+        if char == ZERO_SYM and i + 1 < source_len:
+            if (source[i + 1] == X_SYM):
                 i += 2
                 hex_digit_start = i
 
@@ -94,7 +97,7 @@ def tokenize(source: str) -> List[Token]:
 
             continue
 
-        if char.isalpha() or char == UNDERSCORE_SYMBOL:
+        if char.isalpha() or char == UNDERSCORE_SYM:
             word_start = i
 
             while i < source_len and (source[i].isalnum() or source[i] == '_'):

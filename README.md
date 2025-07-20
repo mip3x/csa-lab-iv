@@ -62,12 +62,12 @@
             | <const>
             | <alloc>
 
-<variable> ::= "var" <ident> (<number>)?
+<variable> ::= "var" <ident>
 <str_literal> ::= "str" <ident> <string>
-<const> ::= <number> "const" <ident>
-<alloc> ::= <number> "alloc" <ident>
+<const> ::= "const" <ident> <number> 
+<alloc> ::= "alloc" <ident> <number>|<const>
 
-<vector> ::= "vector" <number> ":" <ident>
+<vector> ::= "vector" <number>|<const> ":" <ident>
 
 <if_stmt> ::= "if" <body> ("else" <body>)? "then"
 

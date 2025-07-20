@@ -1,5 +1,5 @@
 \ D - Data Stack ; R - Return Stack
-: print-string ( str -- )
+: print_string ( str -- )
     dup             \ D: [addrof(str):addrof(str)]
     @               \ D: [addrof(str):len(str)]
 
@@ -11,67 +11,67 @@
     next            \ D: [addrof(str)+1]                    R: [len(str)-1]
 ;
 
-: read-symbol ( -- )
+: read_symbol ( -- )
     _disable-int_
 
-    un-buffer-ptr @ 1 +
-    un-buffer-ptr !
+    un_buffer_ptr @ 1 +
+    un_buffer_ptr !
 
-    un-actual-size @ un-buffer-size =
+    un_actual_size @ un_buffer_size =
 
     if 
-        1 overflow-error !
-        error-msg print-string
+        1 overflow_error !
+        error_msg print_string
         cr
         _iret_
     then
 
-    key dup CR-char = if _iret_ then dup NL-char = if _iret_ then
-    un-buffer-ptr @ !
+    key dup CR_char = if _iret_ then dup NL_char = if _iret_ then
+    un_buffer_ptr @ !
 
-    un-actual-size @ 1 +
-    un-actual-size !
+    un_actual_size @ 1 +
+    un_actual_size !
 
-    _enable-int_
+    _enable_int_
 
     _iret_
 ;
 
-: read-string ( -- )
-    0 un-actual-size !
-    _enable-int_
-    _disable-int_
+: read_string ( -- )
+    0 un_actual_size !
+    _enable_int_
+    _disable_int_
 
-    overflow-error 1 = if _exit_ then
+    overflow_error 1 = if _exit_ then
 
-    un-actual-size username-buffer !
+    un_actual_size username_buffer !
 ;
 
 
 vector 1 : read-symbol
 
-str question-msg "What is your name?"
-str error-msg "Buffer overflow!"
+str question_msg "What is your name?"
+str error_msg "Buffer overflow!"
 
-256 const un-buffer-size
-un-buffer-size alloc username-buffer
-var un-buffer-ptr
-var un-actual-size
-var overflow-error
+const un_buffer_size 256
+alloc username_buffer un_buffer_size 
+var un_buffer_ptr
+var un_actual_size
+var overflow_error
 
-str hello-msg "Hello, "
-33 const exclamation-mark
-13 const CR-char
-10 const NL-char
+str hello_msg "Hello, "
+const exclamation_mark 33
+const CR_char 13
+const NL_char 10
 
 
-question-msg print-string
+question_msg print_string
 cr
 
-0 overflow-error !
-username-buffer un-buffer-ptr !
+0 overflow_error !
+username_buffer un_buffer_ptr !
 
-read-string
-hello-msg print-string
-username-buffer print-string
-exclamation-mark emit
+read_string
+hello_msg print_string
+username_buffer print_string
+exclamation_mark emit
