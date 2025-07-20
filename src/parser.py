@@ -45,6 +45,16 @@ class Parser:
             return None
         return self.tokens[self.i]
 
+    def __parse_string(self) -> String:
+        token = self.__get_current_token()
+        if not token or token.kind != TokenType.STRING:
+            raise ParseError(f"ожидаемый тип ввода - строковый литерал, но считан EOF!")
+        
+        string = String(value=token.value)
+        self.__go_to_next_token()
+
+        return string
+
     def __parse_ident(self) -> Ident:
         token = self.__get_current_token()
         if not token:
@@ -126,9 +136,7 @@ class Parser:
             raise ParseError(f"ожидаемый тип ввода - `number`, но считан EOF!")
 
         if token.kind != TokenType.NUMBER:
-            print(token)
             self.__go_to_next_token()
-            print(self.__get_current_token())
             raise ParseError(f"ожидаем тип токена - {str(TokenType.NUMBER)}, но считанный - {str(token.kind)}!")
 
         num = Number(value=int(token.value))
@@ -142,13 +150,11 @@ class Parser:
             raise ParseError(f"ожидаемый тип ввода - `number|const`, но считан EOF!")
 
         if token.kind == TokenType.NUMBER:
-            number = self.__parse_number()
-            return Number(value=number)
+            return self.__parse_number()
 
         if token.kind in (TokenType.WORD, TokenType.SYM):
             ident = self.__parse_ident()
             return Const(ident=ident, number=None)
-
 
     def __parse_statement(self) -> Statement:
         token = self.__get_current_token()
@@ -191,12 +197,8 @@ class Parser:
         
         if keyword.value == Keyword.STR.value:
             ident = self.__parse_ident()
-            token = self.__get_current_token()
+            string = self.__parse_string()
 
-            # if not token or token.kind != TokenType.WORD:
-            #     raise ParseError("ожидался строковый литерал после `str <ident>`!")
-
-            string = String(token.value)
             self.__go_to_next_token() # skip string
 
             return StringLiteral(ident=ident, string=string)

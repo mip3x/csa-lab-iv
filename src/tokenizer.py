@@ -8,6 +8,7 @@ class TokenType(str, Enum):
     NUMBER = "NUMBER"
     WORD = "WORD"
     SYM = "SYM"
+    STRING = "STRING"
 
     def __str__(self):
         return self.value
@@ -34,6 +35,21 @@ def tokenize(source: str) -> List[Token]:
             i += 1
             continue
 
+        if char == STRING_QUOTE:
+            i += 1 # skip starting quote
+            start = i
+            while i < source_len and source[i] != STRING_QUOTE:
+                i += 1
+            if i >= source_len:
+                raise SyntaxError("нет закрывающей кавычки для строкового литерала!")
+
+            string_literal = source[start : i]
+            string_literal_token = Token(TokenType.STRING, string_literal)
+            tokens.append(string_literal_token)
+            i += 1 # skip closing quote
+
+            continue
+
         if char == DOT_SYM and \
             i + 1 < source_len and \
             source[i + 1] == STRING_QUOTE:
@@ -41,6 +57,17 @@ def tokenize(source: str) -> List[Token]:
             print_string_token = Token(TokenType.SYM, source[i : i + 2])
             tokens.append(print_string_token)
             i += 2
+
+            start = i
+            while i < source_len and source[i] != STRING_QUOTE:
+                i += 1
+            if i >= source_len:
+                raise SyntaxError("нет закрывающей кавычки для строки на вывод!")
+
+            string_to_print = source[start : i]
+            string_to_print_token = Token(TokenType.STRING, string_to_print)
+            tokens.append(string_to_print_token)
+            i += 1
             
             continue
 

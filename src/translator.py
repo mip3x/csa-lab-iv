@@ -18,9 +18,9 @@ def main(source_file: str, instr_file: str, data_file: str) -> None:
     print(source)
     print()
 
-    # for token in tokens:
-    #     print(token)
-    # print()
+    for token in tokens:
+        print(token)
+    print()
 
     parser = Parser(tokens)
     ast : Program = parser.parse()
