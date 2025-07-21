@@ -35,6 +35,7 @@
 |  **push_rs**| `push rs`          | `RP <- RP-4`<br/>`M[RP] <- rs`  |   1   |
 |             | `push imm`         | `RP <- RP-4`<br/>`M[RP] <- imm` |   2   |
 |  **pop_rs** | `pop rd`           | `rd <- M[RP]`<br/>`RP <- RP+4`  |   1   |
+|  **ret**    | `ret`              | `PC <- M[RP]`<br/>`RP <- RP+4`  |   1   |
 
 ## Арифметические операции
 
@@ -138,3 +139,4 @@
 - `011110` (`0x1E`) - `iret`
 - `011111` (`0x1F`) - `push_rs`
 - `100000` (`0x20`) - `pop_rs`
+- `100001` (`0x21`) - `ret`

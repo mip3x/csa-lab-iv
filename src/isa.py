@@ -9,6 +9,7 @@ class Opcode(str, Enum):
     POP_DS = "pop_ds"
     PUSH_RS = "push_rs"
     POP_RS = "pop_rs"
+    RET = "ret"
 
     ADD = "add"
     ADC = "adc"
@@ -81,7 +82,8 @@ opcode_to_binary = {
     Opcode.DIS_INT: 0x1D,
     Opcode.IRET: 0x1E,
     Opcode.PUSH_RS: 0x1F,
-    Opcode.POP_RS: 0x20
+    Opcode.POP_RS: 0x20,
+    Opcode.RET: 0x21
 }
 
 binary_to_opcode = {
@@ -117,7 +119,8 @@ binary_to_opcode = {
     0x1D: Opcode.DIS_INT,
     0x1E: Opcode.IRET,
     0x1F: Opcode.PUSH_RS,
-    0x20: Opcode.POP_RS
+    0x20: Opcode.POP_RS,
+    0x21: Opcode.RET
 }
 
 
