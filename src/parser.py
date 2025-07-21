@@ -155,6 +155,8 @@ class Parser:
         if token.kind in (TokenType.WORD, TokenType.SYM):
             ident = self.__parse_ident()
             return Const(ident=ident, number=None)
+        
+        raise ParseError(f"ожидаемый тип ввода - `number|const`, но считан {token.kind}!")
 
     def __parse_statement(self) -> Statement:
         token = self.__get_current_token()
@@ -199,8 +201,6 @@ class Parser:
             ident = self.__parse_ident()
             string = self.__parse_string()
 
-            self.__go_to_next_token() # skip string
-
             return StringLiteral(ident=ident, string=string)
 
         if keyword.value == Keyword.CONST.value:
@@ -240,8 +240,6 @@ class Parser:
 
             if token.kind == TokenType.SYM and token.value == DEFINITION_START_SYM:
                 bindings.append(self.__parse_definition())
-                # print(bindings)
-                # exit()
                 continue
 
             if token.kind == TokenType.WORD and token.value in \
