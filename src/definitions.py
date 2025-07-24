@@ -13,3 +13,22 @@ UNDERSCORE_SYM = '_'
 STRING_QUOTE = "\""
 
 HEX_DIGITS = 'abcdef'
+
+DST_REG = "rd"
+SRC1_REG = "rs1"
+SRC2_REG = "rs2"
+
+DST_REG_ADDR_T = "rd_addr_t"
+SRC1_REG_ADDR_T = "rs1_addr_t"
+SRC2_REG_ADDR_T = "rs2_addr_t"
+
+REG_TO_REG_ADDR_T = "reg"
+IMMEDIATE_ADDR_T = "imm"
+INDIRECT_ADDR_T = "ind"
+INDIRECT_IMM_OFFSET_ADDR_T = "ind+imm"
+
+PORT = "port"
+
+IMMEDIATE = "imm"
+ADDRESS = "addr"
+ARGUMENT = "arg"
