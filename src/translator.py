@@ -41,6 +41,7 @@ def translate(source_file : str) -> Tuple[List[Dict[str, Any]], List[int]]:
     parser = Parser(tokens)
     ast : Program = parser.parse()
     print(ast)
+    print()
 
     instructions, data_words = compile_program(ast)
     if not instructions:
@@ -69,6 +70,7 @@ def main(source_file: str, instr_file: str, data_file: str) -> None:
     with open(listing_file, "w", encoding="utf-8") as file:
         file.write(hex_listing)
     
+    print(data_words)
     print(hex_listing)
 
 

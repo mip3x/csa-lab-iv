@@ -111,21 +111,46 @@ def __opcode_uses_rs2(opcode : Opcode) -> bool:
     }
 
 
+class Register(str, Enum):
+    EAX = "EAX"
+    EBX = "EBX"
+    ECX = "ECX"
+    EDX = "EDX"
+    EFX = "EFX"
+    r6  = "r6"
+    r7  = "r7"
+    r8  = "r8"
+    r9  = "r9"
+    r10 = "r10"
+    PC  = "PC"
+    AR  = "AR"
+    DR  = "DR"
+    SP  = "SP"
+    RP  = "RP"
+    IR = "IR"
+
+    def __str__(self):
+        return self.value
+
+
 register_to_id = {
-    'EAX': 0, 'EBX': 1, 'ECX': 2, 'EDX': 3, 'EFX': 4,
-    'r6': 5, 'r7': 6, 'r8': 7, 'r9': 8, 'r10': 9,
-    'PC': 10, 'AR': 11, 'DR': 12, 'SP': 13, 'RP': 14, 'IR': 15,
+    Register.EAX: 0, Register.EBX: 1, Register.ECX: 2,
+    Register.EDX: 3, Register.EFX: 4, Register.r6: 5,
+    Register.r7: 6,  Register.r8: 7, Register.r9: 8,
+    Register.r10: 9, Register.PC: 10, Register.AR: 11,
+    Register.DR: 12, Register.SP: 13, Register.RP: 14,
+    Register.IR: 15,
 }
 
 id_to_register = {v: k for k, v in register_to_id.items()}
 
 
-def __get_reg_id_by_name(reg_name: str) -> int:
-    if reg_name is None:
+def __get_reg_id(reg: Register) -> int:
+    if reg is None:
         return 0
-    if isinstance(reg_name, int):
-        return reg_name & 0xF
-    return register_to_id[reg_name]
+    if isinstance(reg, int):
+        return reg & 0xF
+    return register_to_id[reg]
 
 
 def __get_reg_name_by_id(id: int) -> str:
@@ -221,9 +246,9 @@ def to_bytes(code):
             continue
 
         # get registers id
-        rd = __get_reg_id_by_name(instr.get(DST_REG))
-        rs1 = __get_reg_id_by_name(instr.get(SRC1_REG))
-        rs2 = __get_reg_id_by_name(instr.get(SRC2_REG))
+        rd = __get_reg_id(instr.get(DST_REG))
+        rs1 = __get_reg_id(instr.get(SRC1_REG))
+        rs2 = __get_reg_id(instr.get(SRC2_REG))
 
         # get addr_t id
         rd_addr_t = __get_addr_t_id(instr.get(DST_REG_ADDR_T))

@@ -150,14 +150,14 @@
 | 10  : interruption vector 1  |
 | 11  : interruption vector 2  |
 |    ...                       |
-| n   : program start          |
-|    ...                       |
 | i   : interruption handler 0 |
 | i+1 : interruption handler 1 |
 |    ...                       |
 | f   : function 1 body        |
 |    ...                       |
 | g   : function 2 body        |
+|    ...                       |
+| n   : program start          |
 |    ...                       |
 +------------------------------+
 
