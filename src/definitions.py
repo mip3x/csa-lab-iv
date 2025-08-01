@@ -33,3 +33,11 @@ PORT = "port"
 IMMEDIATE = "imm"
 ADDRESS = "addr"
 ARGUMENT = "arg"
+
+VAR_KIND = "var"
+CONST_KIND = "const"
+ALLOC_KIND = "alloc"
+STR_KIND = "str"
+
+CR_CHAR = 13
+NL_CHAR = 10

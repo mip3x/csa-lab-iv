@@ -1,3 +1,4 @@
 __pycache__/
 *.hex
 *.bin
+test_isa.py

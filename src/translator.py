@@ -65,13 +65,14 @@ def main(source_file: str, instr_file: str, data_file: str) -> None:
     with open(data_file, "wb") as file:
         file.write(data_memory_bytes)
 
-    listing_file = instr_file + ".hex"
+    instr_dump_file = instr_file
+    if ".bin" in instr_dump_file:
+        instr_dump_file = instr_dump_file.split(".bin")[0]
+
+    listing_file = instr_dump_file + ".hex"
     hex_listing = isa_to_hex(instructions)
     with open(listing_file, "w", encoding="utf-8") as file:
         file.write(hex_listing)
-    
-    print(data_words)
-    print(hex_listing)
 
 
 if __name__ == "__main__":
